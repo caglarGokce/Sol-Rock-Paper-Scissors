@@ -2,14 +2,13 @@ use borsh::{BorshDeserialize, BorshSerialize};
 
 #[derive(BorshSerialize, BorshDeserialize, Debug)]
 pub struct GameState {
-    pub waiting_host:String,//
-    pub host_address_length:u8,
+    pub host:[u8;32],//
+    pub waiting:u8,
     pub initialized:u8,
     pub gameseed:String,
     pub lamports:u64,
     pub initializer: [u8;32],
-    pub gamehash: String,
-    pub game_hash_length:u8,
+    pub gamehash: [u8;32],
     pub guest: [u8;32],
     pub whoseturn:u8,
     pub guest_move:u8,
@@ -23,7 +22,30 @@ pub struct GameState {
     pub chat_line_4:String,
     pub chat_line_5:String,
     pub chat_line_6:String,
-}//557
+}
+
+#[derive(BorshSerialize, BorshDeserialize, Debug)]
+pub struct TGameState {
+    pub game_id:String,//
+    pub initialized:u8,
+    pub gameseed:String,
+    pub lamports:u64,
+    pub initializer: [u8;32],
+    pub gamehash: [u8;32],
+    pub guest: [u8;32],
+    pub whoseturn:u8,
+    pub guest_move:u8,
+    pub score_i:u8,
+    pub score_g:u8,
+    pub game_ends:u8,
+    pub lastplaytime:u64,
+    pub chat_line_1:String,
+    pub chat_line_2:String,
+    pub chat_line_3:String,
+    pub chat_line_4:String,
+    pub chat_line_5:String,
+    pub chat_line_6:String,
+}
 
 #[derive(BorshSerialize, BorshDeserialize, Debug, Clone, PartialEq)]
 pub struct Init{
@@ -31,7 +53,7 @@ pub struct Init{
     pub game_ends:u8,
     pub gameseed:String,
     pub lamports:u64,
-    pub game_hash:String,
+    pub game_hash:[u8;32],
 }
 
 #[derive(BorshSerialize, BorshDeserialize, Debug, Clone, PartialEq)]
@@ -43,7 +65,7 @@ pub struct Join{
 pub struct InitializerPlay{
     pub last_round_seed:String,
     pub lastmove:u8,
-    pub new_game_hash:String,
+    pub new_game_hash:[u8;32],
 }
 
 #[derive(BorshSerialize, BorshDeserialize, Debug, Clone, PartialEq)]
